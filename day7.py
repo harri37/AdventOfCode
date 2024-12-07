@@ -859,18 +859,18 @@ for line in data:
     values = list(map(int, line.split(":")[1].strip().split(" ")))
     x.append((target, values))
     
-def find_all_values(curr, rem, target, part=1):
+def is_possible(curr, rem, target, part=1):
     if curr > target:
-        return [curr]
-    if len(rem) == 0:
-        return [curr]
+        return False
+    elif len(rem) == 0:
+        return curr == target
     else:
         if part == 1:
-            return find_all_values(curr + rem[0], rem.copy()[1:], target) + find_all_values(curr * rem[0], rem.copy()[1:], target)
+            return is_possible(curr + rem[0], rem.copy()[1:], target) or is_possible(curr * rem[0], rem.copy()[1:], target)
         else:
-            return find_all_values(curr + rem[0], rem.copy()[1:], target, 2) + find_all_values(curr * rem[0], rem.copy()[1:], target, 2) + find_all_values(concat(curr, rem[0]), rem.copy()[1:], target, 2)
+            return is_possible(curr + rem[0], rem.copy()[1:], target, 2) or is_possible(curr * rem[0], rem.copy()[1:], target, 2) or is_possible(concat(curr, rem[0]), rem.copy()[1:], target, 2)
 
 
-print(sum([target for (target, values) in x if target in find_all_values(values[0], values[1:], target)]))
-print(sum([target for (target, values) in x if target in find_all_values(values[0], values[1:], target, 2)]))
+print(sum([target for (target, values) in x if is_possible(values[0], values[1:], target)]))
+print(sum([target for (target, values) in x if is_possible(values[0], values[1:], target, 2)]))
 
