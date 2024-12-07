@@ -858,16 +858,6 @@ for line in data:
     target = int(line.split(":")[0])
     values = list(map(int, line.split(":")[1].strip().split(" ")))
     x.append((target, values))
-
-def is_possible(curr, rem, target, part=1):
-    if curr > target:
-        return False
-    if len(rem) == 0:
-        return curr == target
-    else:
-        if part == 1:
-            return is_possible(curr + rem[0], rem.copy()[1:], target) or is_possible(curr * rem[0], rem.copy()[1:], target)
-        return is_possible(curr + rem[0], rem.copy()[1:], target) or is_possible(curr * rem[0], rem.copy()[1:], target) or is_possible(concat(curr, rem[0]), rem.copy()[1:], target)
     
 def find_all_values(curr, rem, target, part=1):
     if curr > target:
