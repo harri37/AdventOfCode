@@ -72,9 +72,6 @@ def multiply_tuple(c, t):
 def in_bounds(p):
     return p[0] >= 0 and p[0] < len(data) and p[1] >= 0 and p[1] < len(data[0])
 
-a_map = data.copy()
-
-
 antinodes = set()
 for node, coords in node_to_coords.items():
     for coord1 in coords:
@@ -91,7 +88,6 @@ for node, coords in node_to_coords.items():
                 while in_bounds(curr):
                     antinodes.add(curr)
                     curr = add_tuple(curr, delta)
-                    
                 curr = coord2
                 delta = multiply_tuple(-1, delta)
                 while in_bounds(curr):
