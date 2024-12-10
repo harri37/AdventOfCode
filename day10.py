@@ -96,7 +96,6 @@ for start_point in start_points:
     stack = []
     seen = set()
     stack.append(start_point)
-    score = 0
     while stack:
         curr = stack.pop()
         seen.add(curr)
