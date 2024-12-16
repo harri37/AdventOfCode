@@ -311,7 +311,7 @@ else:
         all_points = all_points.union(path_sets[i])
         i += 1
     
-    print(len(inter))
+    print(len(all_points))
 
 
 
